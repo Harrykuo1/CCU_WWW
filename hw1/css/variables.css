@@ -1,13 +1,30 @@
-:root {
-	--hover-bg-color: rgb(224, 224, 224);
-	--nav-bg-color: rgb(135, 206, 235);
-	--nav-text-color: rgb(0, 0, 0);
-	--dropdown-menu-bg-color: rgb(176, 224, 230);
-  --footer-bg-color: rgb(35, 33, 33);
-  --footer-text-color: rgb(255, 255, 255);
-  --footer-height: 3vh;
+.h-full {
+	height: 100%;
 }
-.content{
-  padding-top: 3vh;
-  min-height: calc(100vh - 3vh - var(--footer-height));
+.content {
+	padding-top: 3vh;
+	width: 100%;
+	min-height: calc(100vh - 3vh - var(--footer-height));
+}
+.flex-center {
+	display: flex;
+	justify-content: center;
+}
+.flex-around {
+	display: flex;
+	justify-content: space-around;
+}
+.inline-flex-col{
+	display: inline-flex;
+	flex-direction: column;
+}
+.flex-col-around {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+.flex-col-between{
+  display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }

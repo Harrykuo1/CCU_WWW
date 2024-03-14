@@ -1,3 +1,12 @@
+:root {
+	--hover-bg-color: rgb(224, 224, 224);
+	--nav-bg-color: rgb(135, 206, 235);
+	--nav-text-color: rgb(0, 0, 0);
+	--dropdown-menu-bg-color: rgb(176, 224, 230);
+	--footer-bg-color: rgb(35, 33, 33);
+	--footer-text-color: rgb(255, 255, 255);
+	--footer-height: 3vh;
+}
 .navbar {
 	display: flex;
 	position: fixed;
@@ -6,6 +15,7 @@
 	background-color: var(--nav-bg-color);
 	width: 100vw;
 	height: 3vh;
+	z-index: 100;
 }
 .navbar a:hover {
 	font-weight: bold;
