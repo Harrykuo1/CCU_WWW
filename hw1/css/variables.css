@@ -3,4 +3,11 @@
 	--nav-bg-color: rgb(135, 206, 235);
 	--nav-text-color: rgb(0, 0, 0);
 	--dropdown-menu-bg-color: rgb(176, 224, 230);
+  --footer-bg-color: rgb(35, 33, 33);
+  --footer-text-color: rgb(255, 255, 255);
+  --footer-height: 3vh;
+}
+.content{
+  padding-top: 3vh;
+  min-height: calc(100vh - 3vh - var(--footer-height));
 }
