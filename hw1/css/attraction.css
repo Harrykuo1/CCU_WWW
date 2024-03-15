@@ -1,0 +1,57 @@
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 320px;
+    margin: 3vh 100px 3vh 100px;
+}
+
+.card-pos-standard{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 240px;
+    border-radius: 999em;
+    background-color: white;
+}
+
+.img-frame{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 240px;
+    overflow: hidden;
+    border-radius: 999em;
+    background-color: white;
+}
+
+.place-name{
+    position: absolute;
+    writing-mode: vertical-lr;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+}
+
+.card:nth-child(odd) .place-name{
+    left: -50px;
+}
+
+.card:nth-child(even) .place-name{
+    right: -50px;
+}
+
+.card-info{
+    position: absolute;
+}
+
+.card:nth-child(odd) .card-info{
+    left: calc(100% + 50px);
+}
+
+.card:nth-child(even) .card-info{
+    right: calc(100% + 50px);
+}
