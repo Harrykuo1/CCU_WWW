@@ -1,7 +1,7 @@
-.footer{
-    background-color: var(--footer-bg-color);
-    height: var(--footer-height);
-    font-size: 25px;
-    color: var(--footer-text-color);
-    text-align: center;
+.footer {
+	background-color: var(--footer-bg-color);
+	height: var(--footer-height);
+	text-align: center;
+	color: var(--footer-text-color);
+	font-size: 25px;
 }

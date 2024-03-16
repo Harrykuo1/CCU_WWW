@@ -12,10 +12,10 @@
 	position: fixed;
 	align-items: center;
 	justify-content: space-around;
+	z-index: 100;
 	background-color: var(--nav-bg-color);
 	width: 100vw;
 	height: 3vh;
-	z-index: 100;
 }
 .navbar a:hover {
 	font-weight: bold;

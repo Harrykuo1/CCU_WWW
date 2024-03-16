@@ -1,77 +1,68 @@
-:root{
-    --info-body-padding: 15px;
+:root {
+	--info-body-padding: 15px;
 }
-
-.food-card{
-    width: 400px;
-    height: 600px;
-    border-radius: 50px;
-    position: relative;
-    z-index: 50;
-    transform: rotate(0deg);
-    transition-property: transform;
-    transition-duration: 1s;
-    transition-timing-function: ease;
-    transition-delay: 0s;
-
+.food-card {
+	position: relative;
+	transform: rotate(0deg);
+	transition-delay: 0s;
+	transition-duration: 1s;
+	transition-property: transform;
+	transition-timing-function: ease;
+	z-index: 50;
+	border-radius: 50px;
+	width: 400px;
+	height: 600px;
 }
-
-.food-card:nth-child(odd){
-    background-color: black;
+.food-card:nth-child(odd) {
+	background-color: black;
 }
-.food-card:nth-child(odd):hover{
-    transform: rotate(15deg);
+.food-card:nth-child(odd):hover {
+	transform: rotate(15deg);
 }
-
-.food-card:nth-child(even){
-    margin-top: 70px;
-    background-color: rgb(113, 113, 113);
+.food-card:nth-child(even) {
+	margin-top: 70px;
+	background-color: rgb(113, 113, 113);
 }
-
-.food-card:nth-child(even):hover{
-    transform: rotate(-15deg);
+.food-card:nth-child(even):hover {
+	transform: rotate(-15deg);
 }
-
-.food-card-img{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-    border-radius: 50px;
-    background-color: white;
+.food-card-img {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50px;
+	background-color: white;
+	overflow: hidden;
+	aspect-ratio: 4 / 3;
 }
-
-.food-card-info{
-    border-radius: 50px;
-    background-color: white;
-    height: 230px;
-    overflow: hidden;
+.food-card-info {
+	border-radius: 50px;
+	background-color: white;
+	height: 230px;
+	overflow: hidden;
 }
-
-.info-body{
-    height: calc(96% - var(--info-body-padding) * 2);
-    background-color: #fff;
-    padding: var(--info-body-padding);
+.info-body {
+	background-color: #fff;
+	padding: var(--info-body-padding);
+	height: calc(96% - var(--info-body-padding) * 2);
 }
-.info-footer{
-    height: 4%;
-    background-color: #eee;
+.info-footer {
+	background-color: #eee;
+	height: 4%;
 }
-
-.card-white-circle{
-    position: absolute;
-    width:20px;
-    height:20px;
-    border-radius:999em;
-    background-color:white;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
+.card-white-circle {
+	position: absolute;
+	top: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+	border-radius: 999em;
+	background-color: white;
+	width: 20px;
+	height: 20px;
 }
-.googlemap-tag-img{
-    position: absolute;
-    top: -87px;
-    left: 50%;
-    transform: translateX(-50%);
+.googlemap-tag-img {
+	position: absolute;
+	top: -87px;
+	left: 50%;
+	transform: translateX(-50%);
 }
