@@ -6,7 +6,7 @@
 	width: 100%;
 	min-height: calc(100vh - 3vh - var(--footer-height));
 }
-.flex{
+.flex {
 	display: flex;
 }
 .flex-center {
@@ -17,7 +17,7 @@
 	display: flex;
 	justify-content: space-around;
 }
-.inline-flex-col{
+.inline-flex-col {
 	display: inline-flex;
 	flex-direction: column;
 }
@@ -26,12 +26,12 @@
 	flex-direction: column;
 	justify-content: space-around;
 }
-.flex-col-between{
-  	display: flex;
+.flex-col-between {
+	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 }
-.flex-col-center{
+.flex-col-center {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
