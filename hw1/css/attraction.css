@@ -1,21 +1,36 @@
 .card{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 320px;
+    min-height: 450px;
     margin: 3vh 100px 3vh 100px;
 }
 
+
 .card-pos-standard{
+    margin-left: calc(50% - 150px);
+    margin-right: auto;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 240px;
-    height: 240px;
+    width: 300px;
+    height: 450px;
     border-radius: 999em;
     background-color: white;
 }
+
+.card:nth-child(odd):hover .card-pos-standard{
+    transform: translateX(-400px);
+    transition-duration: 1s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+}
+
+.card:nth-child(even):hover .card-pos-standard{
+    transform: translateX(400px);
+    transition-duration: 1s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+}
+
 
 .img-frame{
     display: flex;
@@ -34,6 +49,11 @@
     top: 50%;
     transform: translateY(-50%);
     white-space: nowrap;
+    opacity: 0;
+}
+
+.card:hover .place-name{
+    animation: cardInfoFadeIn 1s ease-in forwards;
 }
 
 .card:nth-child(odd) .place-name{
@@ -46,6 +66,7 @@
 
 .card-info{
     position: absolute;
+    opacity: 0;
 }
 
 .card:nth-child(odd) .card-info{
@@ -54,4 +75,20 @@
 
 .card:nth-child(even) .card-info{
     right: calc(100% + 50px);
+}
+
+.card:hover .card-info{
+    animation: cardInfoFadeIn 1s ease-in forwards;
+}
+
+@keyframes cardInfoFadeIn {
+    0% {
+        opacity: 0;
+    }
+    40%{
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1; 
+    }
 }
