@@ -10,7 +10,7 @@
 .img-container {
 	margin-top: 1vh;
 	width: var(--container--width);
-	height: 400px;
+	height: calc(var(--container--width) * 0.4);
 	overflow: hidden;
 }
 .img-wrap {
@@ -23,7 +23,7 @@
 	display: block;
 	float: left;
 	width: var(--container--width);
-	height: 400px;
+	height: calc(var(--container--width) * 0.4);
 }
 @keyframes animateImg {
 	0% {
