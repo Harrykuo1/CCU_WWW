@@ -3,21 +3,44 @@ $(document).ready(async function () {
     await render_blackBoard(7);
 });
 
+const playMusic = (path) => {
+    var audio = new Audio(path);
+    audio.volume = window.volume;
+    audio.play();
+}
+
+const startMusic = (key, word, isWhiteKey) => {
+    if(isWhiteKey){
+        key.classList.add('whiteKeyClick');
+    }
+    else{
+        key.classList.add('blackKeyClick');
+    }
+    playMusic('sound/' + word + '.wav');
+}
+
+const endMusic = (key, isWhiteKey) => {
+    if(isWhiteKey){
+        key.classList.remove('whiteKeyClick');
+    }
+    else{
+        key.classList.remove('blackKeyClick');
+    }
+}
+
 const render_whiteBoard = (num) => {
     let wordArr = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';'];
     let whiteBoard = document.getElementById("whiteBoard");
-    for(let i=0; i<num; i++){
+    for(let i=0; i<num; i++) {
         let whiteKey = document.createElement("div");
         whiteKey.setAttribute("class", "whiteKey");
         whiteKey.setAttribute("id", "whiteKey" + i);
 
         whiteKey.addEventListener('mousedown', () => {
-            whiteKey.classList.add('whiteKeyClick');
-            var audio = new Audio('sound/' + wordArr[i] + '.wav');
-            audio.play();
+            startMusic(whiteKey, wordArr[i], true);
         });
         whiteKey.addEventListener('mouseup', () => {
-            whiteKey.classList.remove('whiteKeyClick');
+            endMusic(whiteKey, true);
         });
 
         let wordDiv = document.createElement("div");
@@ -35,19 +58,17 @@ const render_blackBoard = (num) => {
     let blackKeyWidth = whiteKeyWidth * 2 / 3;
     let leftOffset = whiteKeyWidth * 2 / 3;
     let blackBoard = document.getElementById("blackBoard");
-    for(let i=0; i<num; i++){
+    for(let i=0; i<num; i++) {
         let blackKey = document.createElement("div");
         blackKey.setAttribute("class", "blackKey absolute");
         blackKey.setAttribute("id", "blackKey" + i);
         blackKey.style.left = leftOffset + "px";
 
         blackKey.addEventListener('mousedown', () => {
-            blackKey.classList.add('blackKeyClick');
-            var audio = new Audio('sound/' + wordArr[i] + '.wav');
-            audio.play();
+            startMusic(blackKey, wordArr[i], false);
         });
         blackKey.addEventListener('mouseup', () => {
-            blackKey.classList.remove('blackKeyClick');
+            endMusic(blackKey, false);
         });
 
         let wordDiv = document.createElement("div");
@@ -56,11 +77,45 @@ const render_blackBoard = (num) => {
         blackKey.appendChild(wordDiv);
         blackBoard.appendChild(blackKey);
 
-        if(i == 1 || i == 4){
+        if(i == 1 || i == 4) {
             leftOffset += whiteKeyWidth * 2;
         }
-        else{
+        else {
             leftOffset += whiteKeyWidth;
         }
     }
 }
+
+document.addEventListener('keydown', function(event) {
+    let whiteWordArr = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';'];
+    let blackWordArr = ['w', 'e', 't', 'y', 'u', 'o', 'p'];
+
+    keyIdx = whiteWordArr.indexOf(event.key)
+    if(keyIdx != -1){
+        whiteKey = document.getElementById("whiteKey" + keyIdx);
+        startMusic(whiteKey, event.key, true);
+    }
+
+    keyIdx = blackWordArr.indexOf(event.key)
+    if(keyIdx != -1){
+        blackKey = document.getElementById("blackKey" + keyIdx);
+        startMusic(blackKey, event.key, false);
+    }
+});
+
+document.addEventListener('keyup', function(event) {
+    let whiteWordArr = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';'];
+    let blackWordArr = ['w', 'e', 't', 'y', 'u', 'o', 'p'];
+
+    keyIdx = whiteWordArr.indexOf(event.key)
+    if(keyIdx != -1){
+        whiteKey = document.getElementById("whiteKey" + keyIdx);
+        endMusic(whiteKey, true);
+    }
+
+    keyIdx = blackWordArr.indexOf(event.key)
+    if(keyIdx != -1){
+        blackKey = document.getElementById("blackKey" + keyIdx);
+        endMusic(blackKey, false);
+    }
+});
