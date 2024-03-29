@@ -1,6 +1,7 @@
 $(document).ready(async function () {
     await render_whiteBoard(10);
     await render_blackBoard(7);
+    window.volume = 0.5;
 });
 
 const playMusic = (path) => {
@@ -119,3 +120,7 @@ document.addEventListener('keyup', function(event) {
         endMusic(blackKey, false);
     }
 });
+
+const setVolume = (volume) => {
+    window.volume = volume / 100.0;
+};
