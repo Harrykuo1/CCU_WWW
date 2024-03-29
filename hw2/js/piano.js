@@ -11,6 +11,15 @@ const render_whiteBoard = (num) => {
         whiteKey.setAttribute("class", "whiteKey");
         whiteKey.setAttribute("id", "whiteKey" + i);
 
+        whiteKey.addEventListener('mousedown', () => {
+            whiteKey.classList.add('whiteKeyClick');
+            var audio = new Audio('sound/' + wordArr[i] + '.wav');
+            audio.play();
+        });
+        whiteKey.addEventListener('mouseup', () => {
+            whiteKey.classList.remove('whiteKeyClick');
+        });
+
         let wordDiv = document.createElement("div");
         wordDiv.setAttribute("class", "flex justify-center text-black");
         wordDiv.textContent += wordArr[i];
@@ -31,6 +40,15 @@ const render_blackBoard = (num) => {
         blackKey.setAttribute("class", "blackKey absolute");
         blackKey.setAttribute("id", "blackKey" + i);
         blackKey.style.left = leftOffset + "px";
+
+        blackKey.addEventListener('mousedown', () => {
+            blackKey.classList.add('blackKeyClick');
+            var audio = new Audio('sound/' + wordArr[i] + '.wav');
+            audio.play();
+        });
+        blackKey.addEventListener('mouseup', () => {
+            blackKey.classList.remove('blackKeyClick');
+        });
 
         let wordDiv = document.createElement("div");
         wordDiv.setAttribute("class", "flex justify-center text-white");
