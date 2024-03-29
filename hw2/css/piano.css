@@ -1,0 +1,68 @@
+:root {
+	--whiteKey-width: 60px;
+	--whiteKey-height: 200px;
+	--whiteKey-click-color: rgb(200, 200, 200);
+	--blackKey-width: calc(var(--whiteKey-width) * 2 / 3);
+	--blackKey-height: calc(var(--whiteKey-height) * 2 / 3);
+	--blackKey-click-color: rgb(47, 47, 47);
+
+}
+
+.piano-container{
+	width: calc(var(--whiteKey-width) * 10);
+}
+
+.whiteKey{
+	position: relative;
+	width: var(--whiteKey-width);
+	height: var(--whiteKey-height);
+	background-color: white;
+	border-radius: 0.375rem;
+	border: solid 1px;
+	border-bottom: gray;
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	padding-bottom: 10px;
+	/* linear-gradient(to bottom, white, rgb(165, 165, 165)) */
+}
+
+.whiteKey::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: -1px;
+	border-left: solid 1px;
+	border-right: solid 1px;
+	border-bottom: solid 1px;
+	width: var(--whiteKey-width);
+	height: 10px;
+	background: linear-gradient(to bottom, white, var(--whiteKey-click-color));
+	border-radius: 0 0 0.375rem 0.375rem;
+}
+
+.whiteKeyClick{
+	background: radial-gradient(circle, white, var(--whiteKey-click-color));
+}
+
+.whiteKeyClick::after{
+	background: none !important;
+	background-color: var(--whiteKey-click-color);
+}
+
+.blackKey{
+	width: var(--blackKey-width);
+	height: var(--blackKey-height);
+	background: linear-gradient(to bottom, var(--blackKey-click-color), black);
+	border-bottom-left-radius: 0.375rem;
+	border-bottom-right-radius: 0.375rem;
+	border: solid 1px;
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	padding-bottom: 10px;
+}
+
+.blackKeyClick{
+	background: linear-gradient(to bottom, black, var(--blackKey-click-color)) !important;
+}

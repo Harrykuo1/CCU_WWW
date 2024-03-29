@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/piano.css"/>
+  <script src="js/piano.js"></script>
+</head>
+<body>
+  <div class="h-screen w-screeen bg-sky-100 px-24 flex justify-center items-center">
+    <div class="bg-black rounded-xl px-9 py-8">
+      <div class="piano-container">
+        <!-- header -->
+        <div class="flex justify-between items-center mb-5">
+          <div class="text-2xl text-gray-200">HW2 PIANO</div>
+          <div class="flex text-base text-gray-200">
+            Volume
+            <div class="ml-2">
+              <input id="volumeSlider" type="range" value="50" min="0" max="100" class="w-full h-2 bg-gray-200 rounded-lg cursor-pointer dark:bg-gray-700 accent-white">
+            </div>
+          </div>
+          <div class="flex text-base text-gray-200">
+            Record
+            <label class="ml-2 inline-flex items-center cursor-pointer">
+              <input type="checkbox" value="" class="sr-only peer">
+              <div class="relative w-11 h-6 rounded-full 
+              dark:bg-gray-700 peer-checked:bg-gray-500 peer-checked:after:translate-x-full 
+              after:absolute after:top-[2px] after:start-[2px] after:bg-gray-300 peer-checked:after:bg-white
+              after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+            </label>
+          </div>
+          <div class="flex justify-center items-center">
+            <button type="button" class="bg-gray-400 hover:bg-gray-500 text-black font-medium rounded-full w-8 h-8 flex items-center justify-center ">
+              <i class="fas fa-xs fa-play"></i>
+            </button>
+          </div>
+          <div>
+            <button type="button" class="bg-red-500 hover:bg-red-600 text-white font-medium rounded-full w-8 h-8 flex items-center justify-center">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- keyBoard -->
+        <div class="relative">
+          <div id="whiteBoard" class="flex">
+          </div>
+  
+          <div id="blackBoard" class="absolute top-0 flex">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
