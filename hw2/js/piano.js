@@ -1,36 +1,23 @@
-$(document).ready(async function () {
-    await render_whiteBoard(10);
-    await render_blackBoard(7);
-    window.volume = 0.5;
+$(document).ready(function () {
+    initVariable();
+    renderWhiteBoard(10);
+    renderBlackBoard(7);
 });
 
-const playMusic = (path) => {
-    var audio = new Audio(path);
-    audio.volume = window.volume;
-    audio.play();
+const initVariable = () => {
+    window.volume = 0.5;
+    window.recordArr = [];
+    window.isRecording = false;
+    window.canPressed = true;
+    window.whiteKeyWidth = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--whiteKey-width'));
+    window.blackKeyWidth = window.whiteKeyWidth * 2 / 3;
+    window.whiteKeyWord = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';'];
+    window.blackKeyWord = ['w', 'e', 't', 'y', 'u', 'o', 'p'];
+    window.keyDict = {};
+    window.pressedKeys = {};
 }
 
-const startMusic = (key, word, isWhiteKey) => {
-    if(isWhiteKey){
-        key.classList.add('whiteKeyClick');
-    }
-    else{
-        key.classList.add('blackKeyClick');
-    }
-    playMusic('sound/' + word + '.wav');
-}
-
-const endMusic = (key, isWhiteKey) => {
-    if(isWhiteKey){
-        key.classList.remove('whiteKeyClick');
-    }
-    else{
-        key.classList.remove('blackKeyClick');
-    }
-}
-
-const render_whiteBoard = (num) => {
-    let wordArr = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';'];
+const renderWhiteBoard = (num) => {
     let whiteBoard = document.getElementById("whiteBoard");
     for(let i=0; i<num; i++) {
         let whiteKey = document.createElement("div");
@@ -38,25 +25,24 @@ const render_whiteBoard = (num) => {
         whiteKey.setAttribute("id", "whiteKey" + i);
 
         whiteKey.addEventListener('mousedown', () => {
-            startMusic(whiteKey, wordArr[i], true);
+            if (pressedKeys[i]) return;
+            pressedKeys[i] = true;
+            startMusic(window.whiteKeyWord[i]);
         });
         whiteKey.addEventListener('mouseup', () => {
-            endMusic(whiteKey, true);
+            delete pressedKeys[i];
+            endMusic(window.whiteKeyWord[i]);
         });
 
-        let wordDiv = document.createElement("div");
-        wordDiv.setAttribute("class", "flex justify-center text-black");
-        wordDiv.textContent += wordArr[i];
+        wordDiv = renderWordDiv(window.whiteKeyWord[i], true)
         whiteKey.appendChild(wordDiv);
-
         whiteBoard.appendChild(whiteKey);
+
+        keyDict[window.whiteKeyWord[i]] = ["white", i];
     }
 }
 
-const render_blackBoard = (num) => {
-    let wordArr = ['w', 'e', 't', 'y', 'u', 'o', 'p'];
-    let whiteKeyWidth = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--whiteKey-width'));
-    let blackKeyWidth = whiteKeyWidth * 2 / 3;
+const renderBlackBoard = (num) => {
     let leftOffset = whiteKeyWidth * 2 / 3;
     let blackBoard = document.getElementById("blackBoard");
     for(let i=0; i<num; i++) {
@@ -66,17 +52,20 @@ const render_blackBoard = (num) => {
         blackKey.style.left = leftOffset + "px";
 
         blackKey.addEventListener('mousedown', () => {
-            startMusic(blackKey, wordArr[i], false);
+            if (pressedKeys[i]) return;
+            pressedKeys[i] = true;
+            startMusic(window.blackKeyWord[i]);
         });
         blackKey.addEventListener('mouseup', () => {
-            endMusic(blackKey, false);
+            delete pressedKeys[i];
+            endMusic(window.blackKeyWord[i]);
         });
 
-        let wordDiv = document.createElement("div");
-        wordDiv.setAttribute("class", "flex justify-center text-white");
-        wordDiv.textContent += wordArr[i];
+        wordDiv = renderWordDiv(window.blackKeyWord[i], false)
         blackKey.appendChild(wordDiv);
         blackBoard.appendChild(blackKey);
+
+        keyDict[window.blackKeyWord[i]] = ["black", i];
 
         if(i == 1 || i == 4) {
             leftOffset += whiteKeyWidth * 2;
@@ -87,40 +76,94 @@ const render_blackBoard = (num) => {
     }
 }
 
+const renderWordDiv = (word, isWhiteKey) => {
+    let wordDiv = document.createElement("div");
+    if(isWhiteKey){
+        wordDiv.setAttribute("class", "flex justify-center text-black");
+    }
+    else{
+        wordDiv.setAttribute("class", "flex justify-center text-white");
+    }
+    wordDiv.textContent += word;
+    return wordDiv;
+}
+
 document.addEventListener('keydown', function(event) {
-    let whiteWordArr = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';'];
-    let blackWordArr = ['w', 'e', 't', 'y', 'u', 'o', 'p'];
-
-    keyIdx = whiteWordArr.indexOf(event.key)
-    if(keyIdx != -1){
-        whiteKey = document.getElementById("whiteKey" + keyIdx);
-        startMusic(whiteKey, event.key, true);
-    }
-
-    keyIdx = blackWordArr.indexOf(event.key)
-    if(keyIdx != -1){
-        blackKey = document.getElementById("blackKey" + keyIdx);
-        startMusic(blackKey, event.key, false);
-    }
+    if (pressedKeys[event.key]) return;
+    pressedKeys[event.key] = true;
+    startMusic(event.key);
 });
 
 document.addEventListener('keyup', function(event) {
-    let whiteWordArr = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';'];
-    let blackWordArr = ['w', 'e', 't', 'y', 'u', 'o', 'p'];
-
-    keyIdx = whiteWordArr.indexOf(event.key)
-    if(keyIdx != -1){
-        whiteKey = document.getElementById("whiteKey" + keyIdx);
-        endMusic(whiteKey, true);
-    }
-
-    keyIdx = blackWordArr.indexOf(event.key)
-    if(keyIdx != -1){
-        blackKey = document.getElementById("blackKey" + keyIdx);
-        endMusic(blackKey, false);
-    }
+    delete pressedKeys[event.key];
+    endMusic(event.key);
 });
+
+const playMusic = (path) => {
+    var audio = new Audio(path);
+    audio.volume = window.volume;
+    audio.play();
+}
+
+const startMusic = (word, fromPlayAll=false) => {
+    if(window.keyDict.hasOwnProperty(word) && (window.canPressed || fromPlayAll)) {
+        color = keyDict[word][0];
+        keyIdx = keyDict[word][1];
+        key = document.getElementById(color + "Key" + keyIdx)
+        key.classList.add(color + "KeyClick");
+        playMusic('sound/' + word + '.wav');
+        if(window.isRecording) {
+            if(Object.keys(window.pressedKeys).length == 1){
+                window.recordArr.push([]);
+            }
+            window.recordArr[window.recordArr.length - 1].push(word)
+        }
+    }
+}
+
+const endMusic = (word, fromPlayAll=false) => {
+    if(window.keyDict.hasOwnProperty(word) && (window.canPressed || fromPlayAll)) {
+        color = keyDict[word][0];
+        keyIdx = keyDict[word][1];
+        key = document.getElementById(color + "Key" + keyIdx)
+        key.classList.remove(color + "KeyClick");
+    }
+}
 
 const setVolume = (volume) => {
     window.volume = volume / 100.0;
 };
+
+const setIsRecording = (cb) => {
+    if(cb.checked) {
+        window.isRecording = true;
+    }
+    else {
+        window.isRecording = false;
+    }
+}
+
+const playAll = async () => {
+    window.canPressed = false
+    let originStatus = window.isRecording
+    window.isRecording = false;
+    for (const wordSet of window.recordArr) {
+        for(const word of wordSet){
+            startMusic(word, true);
+        }
+        await sleep(500);
+        for(const word of wordSet){
+            endMusic(word, true);
+        }
+    }
+    window.isRecording = originStatus;
+    window.canPressed = true;
+};
+
+const delRecordingArr = () => {
+    window.recordArr = []
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
