@@ -151,7 +151,7 @@ const playAll = async () => {
         for(const word of wordSet){
             startMusic(word, true);
         }
-        await sleep(500);
+        await sleep(350);
         for(const word of wordSet){
             endMusic(word, true);
         }
