@@ -9,6 +9,7 @@ const initVariable = () => {
     window.recordArr = [];
     window.isRecording = false;
     window.canPressed = true;
+    window.isPlayingAll = false;
     window.whiteKeyWidth = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--whiteKey-width'));
     window.blackKeyWidth = window.whiteKeyWidth * 2 / 3;
     window.whiteKeyWord = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';'];
@@ -144,6 +145,10 @@ const setIsRecording = (cb) => {
 }
 
 const playAll = async () => {
+    if(window.isPlayingAll){
+        return;
+    }
+    window.isPlayingAll = true;
     window.canPressed = false
     let originStatus = window.isRecording
     window.isRecording = false;
@@ -158,6 +163,7 @@ const playAll = async () => {
     }
     window.isRecording = originStatus;
     window.canPressed = true;
+    window.isPlayingAll = false;
 };
 
 const delRecordingArr = () => {
