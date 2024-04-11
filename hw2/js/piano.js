@@ -172,6 +172,11 @@ const delRecordingArr = () => {
     window.recordArr = []
 }
 
+const clears = () => {
+    alert("已清空");
+    delRecordingArr();
+}
+  
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
