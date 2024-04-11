@@ -16,6 +16,7 @@ const initVariable = () => {
     window.blackKeyWord = ['w', 'e', 't', 'y', 'u', 'o', 'p'];
     window.keyDict = {};
     window.pressedKeys = {};
+    window.pressedKeysOnce = {};
 }
 
 const renderWhiteBoard = (num) => {
@@ -89,16 +90,21 @@ const renderWordDiv = (word, isWhiteKey) => {
     return wordDiv;
 }
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', async function(event) {
     let eventKey = event.key.toLowerCase()
-    if (pressedKeys[eventKey]) return;
+    if (pressedKeysOnce[eventKey]) return;
     pressedKeys[eventKey] = true;
+    pressedKeysOnce[eventKey] = true;
     startMusic(eventKey);
+    await sleep(1);
+    delete pressedKeys[eventKey];
+    console.log("d " + eventKey)
 });
 
 document.addEventListener('keyup', function(event) {
     let eventKey = event.key.toLowerCase()
     delete pressedKeys[eventKey];
+    delete pressedKeysOnce[eventKey];
     endMusic(eventKey);
 });
 
