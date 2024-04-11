@@ -96,9 +96,8 @@ document.addEventListener('keydown', async function(event) {
     pressedKeys[eventKey] = true;
     pressedKeysOnce[eventKey] = true;
     startMusic(eventKey);
-    await sleep(1);
+    await sleep(500);
     delete pressedKeys[eventKey];
-    console.log("d " + eventKey)
 });
 
 document.addEventListener('keyup', function(event) {
@@ -164,7 +163,7 @@ const playAll = async () => {
         for(const word of wordSet){
             startMusic(word, true);
         }
-        await sleep(350);
+        await sleep(500);
         for(const word of wordSet){
             endMusic(word, true);
         }
