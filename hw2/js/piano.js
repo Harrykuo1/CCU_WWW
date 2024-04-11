@@ -90,14 +90,16 @@ const renderWordDiv = (word, isWhiteKey) => {
 }
 
 document.addEventListener('keydown', function(event) {
-    if (pressedKeys[event.key]) return;
-    pressedKeys[event.key] = true;
-    startMusic(event.key);
+    let eventKey = event.key.toLowerCase()
+    if (pressedKeys[eventKey]) return;
+    pressedKeys[eventKey] = true;
+    startMusic(eventKey);
 });
 
 document.addEventListener('keyup', function(event) {
-    delete pressedKeys[event.key];
-    endMusic(event.key);
+    let eventKey = event.key.toLowerCase()
+    delete pressedKeys[eventKey];
+    endMusic(eventKey);
 });
 
 const playMusic = (path) => {
